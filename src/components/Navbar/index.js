@@ -62,6 +62,7 @@ const StyledLink = styled(NavLink)`
 
     font-size: 16px;
     font-weight: 700;
+    line-height: 1.4em;
 
     transition: background .15s, color .15s;
 

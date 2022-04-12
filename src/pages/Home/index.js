@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import { gql, useQuery } from "@apollo/client"
+import { css } from 'styled-components';
+
 import { colors } from '../../constants/colors';
 
 const Home = () => {
@@ -7,7 +9,7 @@ const Home = () => {
     const { data, loading } = useQuery(gql`
         {
             todos {
-                id, content
+                id, content, is_done
             }
         }
     `)
@@ -18,7 +20,7 @@ const Home = () => {
             <TodoList>
                 { loading && <ListLoading>Loading ...</ListLoading> }
                 { data?.todos.map( todo =>
-                    <TodoItem key={todo.id}>{ todo.content }</TodoItem>
+                    <TodoItem key={todo.id} isDone={todo.is_done}>{ todo.content }</TodoItem>
                 )}
             </TodoList>
         </>
@@ -57,6 +59,13 @@ const TodoItem = styled.li`
         background-color: ${ colors.higherBackground };
         box-shadow: 0 0 12px rgba(0,0,0,0.05);
     }
+
+    ${({ isDone }) => isDone && css`
+        color: ${ colors.primary};
+        font-weight: 900;
+        opacity: 0.3;
+        pointer-events: none;
+    `};
 `
 
 export default Home

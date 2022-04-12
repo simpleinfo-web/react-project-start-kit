@@ -11,6 +11,7 @@ import Navbar from './components/Navbar';
 import GlobalStyle from './components/GlobalStyle';
 
 import appSlice from './slices/app';
+import NotFoundPage from './pages/404';
 
 const store = createStore(
     combineReducers({
@@ -46,6 +47,7 @@ const App = () => (
                     <Routes>
                         <Route path='/' element={<Home/>} />
                         <Route path='/counter-demo' element={<CounterDemo/>} />
+                        <Route path='*' element={<NotFoundPage/>} />
                     </Routes>
                 </ContentWrapper>
             </AppLayout>
