@@ -3,6 +3,7 @@ import { gql, useQuery } from "@apollo/client"
 import { css } from 'styled-components';
 
 import { colors } from '../../constants/colors';
+import { respondTo } from '../../utils/responsive';
 
 const Home = () => {
 
@@ -66,6 +67,10 @@ const TodoItem = styled.li`
         opacity: 0.3;
         pointer-events: none;
     `};
+
+    ${ respondTo.md } {
+        padding: 8px 12px;
+    } 
 `
 
 export default Home

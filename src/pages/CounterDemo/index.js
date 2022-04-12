@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { colors } from '../../constants/colors';
 import appSlice from '../../slices/app';
 import { keyframes } from 'styled-components';
+import { respondTo } from '../../utils/responsive';
 
 const CounterDemo = () => {
 
@@ -52,10 +53,18 @@ const Counter = styled.div`
     user-select: none;
 
     animation: ${counterEnter} .3s cubic-bezier(.17,.67,.49,2.11);
+
+    ${ respondTo.md } { 
+        font-size: 120px;
+    }
 `
 
 const Buttons = styled.div`
     margin-top: 40px;
+
+    ${ respondTo.md } { 
+        margin-top: 24px;
+    }
 `
 
 const Button = styled.button`

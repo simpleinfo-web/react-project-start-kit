@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { colors } from '../../constants/colors';
+import { respondTo } from '../../utils/responsive';
 
 const Navbar = () => {
 
@@ -31,6 +32,19 @@ const StyledNavbar = styled.header`
     border-radius: 24px;
 
     background: ${ colors.higherBackground };
+
+    ${ respondTo.md } {
+
+        z-index: 1;
+        top: 16px;
+        
+        width: calc(100% - 32px);
+        height: auto;
+        
+        margin: 16px;
+        padding: 12px;
+        border-radius: 12px;
+    }
 `
 
 const Logo = styled.h1`
@@ -38,6 +52,11 @@ const Logo = styled.h1`
     font-weight: 700;
     text-align: center;
     color: ${ colors.primary };
+
+    ${ respondTo.md } {
+        text-align: left;
+        font-size: 24px;
+    }
 `
 
 const Subtitle = styled.h2`
@@ -45,11 +64,18 @@ const Subtitle = styled.h2`
     font-size: 14px;
     text-align: center;
     color: ${ colors.gray };
+
+    ${ respondTo.md } {
+        text-align: left;
+    }
 `
 
 const Links = styled.nav`
     margin-top: 80px;
     
+    ${ respondTo.md } {
+        margin-top: 12px;
+    }
 `
 
 const StyledLink = styled(NavLink)`
@@ -81,6 +107,12 @@ const StyledLink = styled(NavLink)`
     &:hover, &.active {
         background-color: ${ colors.primary };
         color: ${ colors.white };
+    }
+
+    ${ respondTo.md } {
+        margin-top: 4px;
+        padding: 4px 12px;
+        border-radius: 8px;
     }
 
 `

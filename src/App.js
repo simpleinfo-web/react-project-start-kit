@@ -6,12 +6,13 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
 import Home from './pages/Home';
 import CounterDemo from './pages/CounterDemo';
+import NotFoundPage from './pages/404';
 
 import Navbar from './components/Navbar';
 import GlobalStyle from './components/GlobalStyle';
 
 import appSlice from './slices/app';
-import NotFoundPage from './pages/404';
+import { respondTo } from './utils/responsive';
 
 const store = createStore(
     combineReducers({
@@ -61,11 +62,19 @@ const AppLayout = styled.div`
     
     display: flex;
     align-items: stretch;
+
+    ${ respondTo.md } {
+        flex-direction: column;
+    }
 `
 
 const ContentWrapper = styled.div`
     flex: 1;  
     margin: 40px 24px;
+
+    ${ respondTo.md } {
+        margin: 12px 24px;
+    }
 `
 
 export default App;
