@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { createStore, combineReducers } from 'redux';
-import { Provider } from 'react-redux';
+import { Provider as ReduxProvider } from 'react-redux';
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
 import Home from './pages/Home';
 import CounterDemo from './pages/CounterDemo';
@@ -17,27 +18,40 @@ const store = createStore(
     })
 )
 
-function App() {
-    return (
-        <>
-            <GlobalStyle />
-            <BrowserRouter>
-                <Provider store={store}>
-                    <AppLayout>
-                        <Navbar />
+const gqlClient = new ApolloClient({
+    uri: 'https://todos.d.simpleinfo.tw/graphql',
+    cache: new InMemoryCache(),
+    headers: { 
+        'api-key': 'fb47752e-ad6a-46ef-a3c5-fc2d8b3024ba'
+    }
+})
 
-                        <ContentWrapper>
-                            <Routes>
-                                <Route path='/' element={<Home/>} />
-                                <Route path='/counter-demo' element={<CounterDemo/>} />
-                            </Routes>
-                        </ContentWrapper>
-                    </AppLayout>
-                </Provider>
-            </BrowserRouter>
-        </>
-    );
-}
+const ServiceProviders = ({ children }) => (
+    <BrowserRouter>
+        <ReduxProvider store={store}>
+            <ApolloProvider client={gqlClient}>
+                { children }
+            </ApolloProvider>
+        </ReduxProvider>
+    </BrowserRouter>
+)
+
+const App = () => (
+    <>
+        <GlobalStyle />
+        <ServiceProviders>
+            <AppLayout>
+                <Navbar />
+                <ContentWrapper>
+                    <Routes>
+                        <Route path='/' element={<Home/>} />
+                        <Route path='/counter-demo' element={<CounterDemo/>} />
+                    </Routes>
+                </ContentWrapper>
+            </AppLayout>
+        </ServiceProviders>
+    </>
+);
 
 const AppLayout = styled.div`
     position: relative;
@@ -49,7 +63,7 @@ const AppLayout = styled.div`
 
 const ContentWrapper = styled.div`
     flex: 1;  
-    margin: 40px;
+    margin: 40px 24px;
 `
 
 export default App;

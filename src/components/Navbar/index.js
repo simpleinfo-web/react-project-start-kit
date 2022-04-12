@@ -21,8 +21,10 @@ const Navbar = () => {
 }
 
 const StyledNavbar = styled.header`
-    position: relative;
+    position: sticky;
+    top: 24px;
     width: 360px;
+    height: calc(100vh - 48px);
 
     margin: 24px;
     padding: 64px 32px;
